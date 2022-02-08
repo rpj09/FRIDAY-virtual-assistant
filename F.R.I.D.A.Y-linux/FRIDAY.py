@@ -44,7 +44,7 @@ def takequery():
         # r.dynamic_energy_threshold = True
 
         print("Say something!")
-        audio = r.listen(source, timeout=2, phrase_time_limit=3.5)
+        audio = r.listen(source)
         # audio = r.record(source, duration = 4)
     try:
         print('Recognizing...')
@@ -63,7 +63,7 @@ def wakeup():
 
         r.adjust_for_ambient_noise(source)
 
-        audio = r.listen(source, timeout=2, phrase_time_limit=3.5)
+        audio = r.listen(source)
 
     try:
         query = r.recognize_google(audio, language='en-in')
