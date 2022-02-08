@@ -19,6 +19,7 @@ import sys
 import smtplib
 import threading
 import pyjokes
+from urllib.parse import quote_plus
 
 # text to speech
 
@@ -385,8 +386,8 @@ def automations():
 
             elif 'google' in query:
                 speak('sir,what should i search on google')
-                cm = takequery()
-                webbrowser.open(f'{cm}')
+                cm = quote_plus(takequery())
+                webbrowser.open(f'https://www.google.com/search?q={cm}')
 
             elif 'search' in query:
                 query = query.replace('search', '')
