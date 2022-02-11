@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from urllib.parse import quote_plus
 import pyttsx3
 from functools import cache,lru_cache
 import requests
@@ -445,7 +446,7 @@ def automations():
             
             elif 'google' in query:
                 speak('sir,what should i search on google')
-                cm =takequery()
+                cm = quote_plus(takequery())
                 webbrowser.open(f'{cm}')
 
             elif 'search' in query:
