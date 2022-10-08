@@ -38,7 +38,7 @@ _NOTE: This project has cross-platform support but requires a bit of tweaking to
 support platforms other than linux_
 
 - [x] Linux
-- [x] Windows (refer to [#3](https://github.com/sujaldev/skylon/issues/3))
+- [x] Windows 
 - [ ] Mac (requires minor changes)
 
 
