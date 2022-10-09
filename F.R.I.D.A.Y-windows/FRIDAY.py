@@ -1,9 +1,7 @@
 from __future__ import unicode_literals
 from urllib.parse import quote_plus
 import pyttsx3
-from functools import cache,lru_cache
 import requests
-from cachetools import cached
 import speech_recognition as sr
 import datetime
 import os
@@ -86,44 +84,21 @@ def takequery():
 
 
 
-
-
 def wakeup():
+
     r = sr.Recognizer()
-    gs = False
-    while True:
-        try:
-            with sr.Microphone() as source:
-                #r.pause_threshold = 2 
-                r.adjust_for_ambient_noise(source)
-                audio = r.listen(source,timeout=2,phrase_time_limit=3.5 )
-                #audio = r.record(source, duration = 4)
-                query = r.recognize_google(audio,language='en-in')
-                query = query.lower()
-                if 'friday' in query or 'alpha' in query:
-                    gs=True
-                    break
-                elif 'kill' in query :
-                    gs=False
-                    break
-        except Exception as e:
-            return 'none'
-    return gs
+    with sr.Microphone() as source:
+        r.pause_threshold = 2
+        r.adjust_for_ambient_noise(source)
+        #audio = r.listen(source,timeout=2,phrase_time_limit=4 )
+        audio = r.record(source, duration = 4)
 
-def keypress_start():
-    gm = False
-    while gm==False:
-        if keyboard.is_pressed('ctrl +space'):
-            gm= True
-    return gm
-
-def keypress_exit():
-    gm = True
-    while gm==True:
-        if keyboard.is_pressed('ctrl+8'):
-            gm= False
-    return gm
-
+    try:
+        query = r.recognize_google(audio,language='en-in')
+    except Exception as e:
+        return 'none'
+    query = query.lower()
+    return query
 
 
 #to wish
@@ -508,44 +483,23 @@ def automations():
         
 
 
-##if __name__ == '__main__':
-
-@cached(cache={})
-def main():
-    try:
-        while True:
-            start=time.time()  
-            permission1=wakeup()
-            print(permission1)
-            permission2=keypress_start()
-            if wakeup()==True or keypress_start()==True:
-                #permission=wakeup()
+if __name__ == '__main__': 
+    while True:
+        permission = wakeup()
+        print(permission)
+        try:
+            if "friday" in permission or 'alpha' in permission:
+                t1=threading.Thread(target=gui)
+                t1.start()
+                automations()
                 
-                    print(time.time()-start)
-                    t1=threading.Thread(target=gui)
-                    t1.start()
-                    automations()
-
-                    '''
-                    print('working..')
-                    if permission or keyboard.is_pressed('ctrl+space')==True:
-                        print(time.time()-start)
-                        t1=threading.Thread(target=gui)
-                        t1.start()
-                        automations()                
-                    elif "break" in permission:
-                        speak('going offline') 
-                        sys.exit()
-                    '''
-            elif permission1==False or permission2==False:
+            elif "break" in permission:
+                speak('going offline') 
                 sys.exit()
-    except keypress_exit()==False or wakeup()==False:
-        sys.exit()
-
+        except Exception as e:
+            print(e)     
         
-
-main()      
-        
+       
         
         
 
