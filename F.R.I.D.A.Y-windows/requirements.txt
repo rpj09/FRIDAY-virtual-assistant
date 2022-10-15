@@ -1,4 +1,4 @@
-SpeechRecognition==3.8.1 
+pythSpeechRecognition==3.8.1 
 pywhatkit==5.3 
 wikipedia==1.4.0 
 PyAutoGUI==0.9.53 
