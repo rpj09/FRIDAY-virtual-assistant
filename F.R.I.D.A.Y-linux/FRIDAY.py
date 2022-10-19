@@ -3,6 +3,7 @@ from urllib.parse import quote_plus
 import requests
 from functools import cache,lru_cache
 import speech_recognition as sr
+import wikipedia
 import datetime
 import os
 from requests import get
@@ -20,7 +21,7 @@ import sys
 import smtplib
 import threading
 import pyjokes
-
+import youtube_dl
 
 
 #text to speech
@@ -256,6 +257,17 @@ def whatsapp():
     except Exception as e:
         speak('there was a error while sending the message')
 
+def yt_music_downloader():
+    video_url = input("please enter youtube video url:")
+    video_info = youtube_dl.YoutubeDL().extract_info(url = video_url,download=False)
+    filename = f"{video_info['title']}.mp3"
+    options={'format':'bestaudio/best','keepvideo':False,'outtmpl':filename,}
+
+    with youtube_dl.YoutubeDL(options) as ydl:
+        ydl.download([video_info['webpage_url']])
+
+    print("Download complete... {}".format(filename))
+
 
 
 def automations():
@@ -282,6 +294,9 @@ def automations():
             elif 'open whatsapp' in query:
                 webbrowser.open('https://web.whatsapp.com/')
 
+            elif "wikipedia" in query:
+                print(wikipedia.summary(query))
+            
             elif 'open youtube' in query:
                 webbrowser.open('https://www.youtube.com/')
             elif 'joke' in query or 'comedy' in query:
@@ -290,9 +305,9 @@ def automations():
                 print(jk)
             elif 'joke' in query:
                 speak(pyjokes.get_joke())
-        
-        
-        
+            elif "download music playlist" in query:
+                yt_music_downloader()
+                        
             elif 'open chrome' in query:
                 speak("Okay sir, opening chrome") 
                 os.system('google-chrome')
