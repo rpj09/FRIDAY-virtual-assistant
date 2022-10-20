@@ -257,8 +257,9 @@ def whatsapp():
     except Exception as e:
         speak('there was a error while sending the message')
 
+
 def yt_music_downloader():
-    video_url = input("please enter youtube video url:")
+    video_url = input(speak("please enter youtube video url:"))
     video_info = youtube_dl.YoutubeDL().extract_info(url = video_url,download=False)
     filename = f"{video_info['title']}.mp3"
     options={'format':'bestaudio/best','keepvideo':False,'outtmpl':filename,}
@@ -266,8 +267,7 @@ def yt_music_downloader():
     with youtube_dl.YoutubeDL(options) as ydl:
         ydl.download([video_info['webpage_url']])
 
-    print("Download complete... {}".format(filename))
-
+    speak("Download complete... {}".format(filename))
 
 
 def automations():
@@ -293,9 +293,6 @@ def automations():
                 my_loaction()
             elif 'open whatsapp' in query:
                 webbrowser.open('https://web.whatsapp.com/')
-
-            elif "wikipedia" in query:
-                print(wikipedia.summary(query))
             
             elif 'open youtube' in query:
                 webbrowser.open('https://www.youtube.com/')
@@ -307,7 +304,8 @@ def automations():
                 speak(pyjokes.get_joke())
             elif "download music playlist" in query:
                 yt_music_downloader()
-                        
+        
+                
             elif 'open chrome' in query:
                 speak("Okay sir, opening chrome") 
                 os.system('google-chrome')
