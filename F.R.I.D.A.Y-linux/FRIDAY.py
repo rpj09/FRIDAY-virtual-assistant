@@ -22,7 +22,7 @@ import smtplib
 import threading
 import pyjokes
 import youtube_dl
-
+import googlemaps
 
 #text to speech
 
@@ -269,6 +269,19 @@ def yt_music_downloader():
 
     speak("Download complete... {}".format(filename))
 
+def maps():
+    try:
+        # Enter your api key instead of None 
+        gmaps = googlemaps.Client(key=None)  
+        speak("Please tell city 1")
+        city1 = takequery()
+        speak('Please tell city 2')
+        city2 = takequery()
+        my_dist = gmaps.distance_matrix(city1,city2)['rows'][0]['elements'][0]
+        dist = [my_dist['distance']['text'],my_dist['duration']['text']]
+        speak(f'Distance between them is {dist[0]} and it will take {dist[1]} to cover the distance')   
+    except Exception:
+        speak("Please Enter your google maps API key to proceed with this feature")
 
 def automations():
     start = time.time()
@@ -405,8 +418,8 @@ def automations():
                 pyautogui.write(query)
                 pyautogui.press('enter')
             
-            
-            
+            elif ('distance' and ('places' or 'cities' or 'states' or 'between')) in query:
+                maps()
             
             elif 'open zoom' in query: 
                 os.system('Zoom')
