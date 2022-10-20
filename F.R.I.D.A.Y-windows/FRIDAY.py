@@ -22,7 +22,7 @@ import threading
 import pyjokes
 import random
 import keyboard
-#query
+import youtube_dl
 
 
 #For  windows 
@@ -275,6 +275,17 @@ def whatsapp():
     except Exception as e:
         speak('there was a error while sending the message')
 
+def yt_music_downloader():
+    video_url = input(speak("please enter youtube video url:"))
+    video_info = youtube_dl.YoutubeDL().extract_info(url = video_url,download=False)
+    filename = f"{video_info['title']}.mp3"
+    options={'format':'bestaudio/best','keepvideo':False,'outtmpl':filename,}
+
+    with youtube_dl.YoutubeDL(options) as ydl:
+        ydl.download([video_info['webpage_url']])
+
+    speak("Download complete... {}".format(filename))
+
 
 
 def automations():
@@ -309,9 +320,10 @@ def automations():
                 print(jk)
             elif 'joke' in query:
                 speak(pyjokes.get_joke())
-        
-        
-        
+            
+            elif "download music playlist" in query:
+                yt_music_downloader()        
+
             elif 'open chrome' in query:
                 speak("Okay sir, opening chrome") 
                 os.system('C:/Program Files (x86)/Google/Chrome/Application/chrome.exe')
