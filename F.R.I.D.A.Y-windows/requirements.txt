@@ -12,3 +12,5 @@ PyAudio==0.2.11
 tk-tools==0.14.0 
 youtube_dl==2021.12.17
 Flask== 2.0.2 
+requests==2.27.1
+googlemaps==4.6.0
