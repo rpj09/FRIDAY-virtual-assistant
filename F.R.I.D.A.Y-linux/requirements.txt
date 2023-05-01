@@ -10,7 +10,7 @@ Pillow==9.3.0
 PyAudio==0.2.11 
 tk-tools==0.14.0 
 youtube_dl==2021.12.17
-Flask== 2.0.2 
+Flask== 2.3.2 
 requests==2.27.1
 youtube_dl==2021.12.17
 googlemaps==4.6.0
