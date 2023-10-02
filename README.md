@@ -3,7 +3,7 @@
 Do you want things to get executed just from your voice command? Well, it's possible now, thanks to FRIDAY, an AI virtual assistant that automates Linux or Windows system on voice.
 
 <div align=center>
-  <img alt="Skylon Logo" src="https://github.com/rpj09/FRIDAY-virtual-assistant/blob/master/assets/Friday.png?raw=true" width=800 height=600 ><br>
+  <img alt="Friday Logo" src="https://github.com/rpj09/FRIDAY-virtual-assistant/blob/master/assets/Friday.png?raw=true" width=800 height=600 ><br>
 </div>
 <br>
 
