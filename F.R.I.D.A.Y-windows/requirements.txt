@@ -6,7 +6,7 @@ gTTS == 2.2.3
 playsound==1.2.2
 pyjokes==0.6.0 
 pytube==11.0.2 
-Pillow==9.3.0 
+Pillow==10.0.1 
 pyttsx3==2.90 
 PyAudio==0.2.11 
 tk-tools==0.14.0 
